@@ -43,6 +43,12 @@ class Video(models.Model):
     def __str__(self):
         return self.title
     
+    def get_absolute_url(self):
+        return reverse("content:video-detail", kwargs={
+            "video_slug": self.slug,
+            "slug": self.course.slug
+            })
+    
     
 def pre_save_course(sender, instance, *args, **kwargs):
     if not instance.slug:

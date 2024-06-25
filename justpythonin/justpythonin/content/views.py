@@ -4,7 +4,7 @@ import stripe.webhook
 from django.http import HttpResponse
 from django.conf import settings
 from django.views import View
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from stripe._error import SignatureVerificationError 
@@ -13,7 +13,7 @@ from django.core.exceptions import MultipleObjectsReturned
 from typing import Any
 from django.db.models.query import QuerySet
 from django.views import generic
-from .models import Course
+from .models import Course, Video
 from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 User = get_user_model()
@@ -30,11 +30,33 @@ class CourseDetailView(generic.DetailView):
     
     def get_context_data(self, **kwargs):
         context = super(CourseDetailView, self).get_context_data(**kwargs)
+        course = self.get_object()
+        has_access = False
+        if self.request.user.is_authenticated:
+            if course in self.request.user.userlibrary.courses.all():
+                has_access = True
+                
         context.update({
             "STRIPE_PUBLIC_KEY": settings.STRIPE_PUBLIC_KEY,
-            # "has_access" : has_access
+            "has_access" : has_access
         })
         return context
+
+class VideoDetailView(generic.DetailView):
+    template_name = "content/video_detail.html"
+    queryset = Course.objects.all()
+    
+    def get_course(self):
+        return get_object_or_404(Course, slug=self.kwargs["slug"])
+    
+    def get_object(self):
+        video = get_object_or_404(Video, slug = self.kwargs["video_slug"])
+        return video
+    
+    def get_queryset(self):
+        course = get_object_or_404(Course, slug= self.kwargs["slug"])
+        return course.videos.all()
+    
 
 class UserProductListView(LoginRequiredMixin, generic.ListView):
     template_name = "content/user_products.html"

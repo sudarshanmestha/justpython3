@@ -31,6 +31,27 @@
 <section class="max-w-7xl mx-auto px-4 sm:px-4 lg:px-8 mb-12">
     <h1 class="text-4xl leading-10 tracking-tight font-extrabold text-gray-900 pb-3">{{course.name}}</h1>
     {% if has_access %}
+    <section class="text-gray-700 body-font">
+        <div class="py-16 flex flex-wrap">
+            <div class="flex flex-wrap w-full">
+                   <div class="hidden md:block md:w-1/4 md:pr-10 md:py-6">
+                            
+                        {% for video in course.videos.all %}
+                            {% include 'content/snippet/video_step.html' with video=video %} 
+                        {% endfor %}
+                    </div>
+                    <div class="md:w-3/4 md:mt-0">
+                        <img class="w-full object-cover object-center rounded-lg" src="{{ object.thumbnail.url }}" alt="step">
+                        <p class="text-gray-500">{{ object.description }}</p>
+                    </div>
+                    <div class="block md:hidden w-full mt-12">
+                        {% for video in course.videos.all %}
+                                {% include 'content/snippet/video_step.html' with video=video %}  
+                        {% endfor %}
+                    </div>
+            </div>
+        </div>
+        </section>
     {% else %}
     <main class="bg-gray-15 rounded-lg flex flex-col md:flex-row items-start">
         <div class="w-3/3 md:w-2/3 pr-6 pb-3">
