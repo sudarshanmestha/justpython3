@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<section class="space-y-6 pb-8 pt-6 md:pb-12 md:pt-10 lg:py-32">
+    <div class="container flex max-w-[64rem] flex-col items-center gap-4 text-center">
+        <h1 class="decoration-[3px] text-9xl text-balance indent-1.5 font-heading text-3xl sm:text-5xl md:text-6xl lg:text-7xl">
+            <span class="text-blue-600 font-bold">Your final destination to become a
+            </span><br />
+            <span class="text-red-500 font-bold">Software Developer</span>
+        </h1>
+        <p class="line-clamp-3 max-w-[42rem] leading-normal text-muted-foreground sm:text-xl sm:leading-8">
+            <span data-br=":r1:" data-brr="1"
+                style="display: inline-block; vertical-align: top; text-decoration: inherit; text-wrap: balance; max-width: 440px;">Build
+                projects and learn software development with simple and comprehensive courses.</span>
+            <script>self.__wrap_n = self.__wrap_n || (self.CSS && CSS.supports("text-wrap", "balance") ? 1 : 2); self.__wrap_b = (e, t, n) => { let r = (n = n || document.querySelector(`[data-br="${e}"]`)).parentElement, a = e => n.style.maxWidth = e + "px"; n.style.maxWidth = ""; let i = r.clientWidth, s = r.clientHeight, o = i / 2 - .25, l = i + .5, _; if (i) { for (a(o), o = Math.max(n.scrollWidth, o); o + 1 < l;)a(_ = Math.round((o + l) / 2)), r.clientHeight === s ? l = _ : o = _; a(l * t + i * (1 - t)) } n.__wrap_o || "undefined" != typeof ResizeObserver && (n.__wrap_o = new ResizeObserver(() => { self.__wrap_b(0, +n.dataset.brr, n) })).observe(r) }; self.__wrap_n != 1 && self.__wrap_b(":r1:", 1)</script>
+        </p>
+        <div class="space-x-4">
+            <a class="inline-flex items-center justify-center text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background bg-primary text-primary-foreground hover:bg-primary/90 h-11 px-8 rounded-md"
+                href="/login">Get Started</a>
+            <a class="inline-flex items-center justify-center text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background border border-input hover:bg-accent hover:text-accent-foreground h-11 px-8 rounded-md"
+                href="/courses">
+                View Courses</a>
+        </div>
+    </div>
+</section>
+<section class="pb-8 pt-6 md:pb-12 md:pt-10 lg:py-36">
+    <div class="container flex max-w-[64rem] flex-col items-center text-center">
+        <iframe
+            src="https://player.vimeo.com/video/918539099?pip=0&amp;quality=undefined&amp;app_id=58479&amp;texttrack=undefined"
+            allow="autoplay; fullscreen; picture-in-picture"
+            class="mx-auto h-96 md:h-128 w-full max-w-xl md:max-w-2xl rounded-lg" <!-- Increased height for medium
+            screens -->
+            title="11-vimeo"
+            data-ready="true">
+        </iframe>
+    </div>
+</section>
+
+
+
+{% endblock content %}

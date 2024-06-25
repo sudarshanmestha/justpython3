@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+
+{% block javascript %}
+<script src="https://unpkg.com/alpinejs" defer></script>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+<script src="https://js.stripe.com/v3/"></script>
+{% endblock javascript %}
+
+{% block title %}{{course.name}} | {% endblock %}
+{% block content %}
+<style>
+    a.text-white:hover {
+
+        font-size: 3.2em;
+    }
+
+    .course-image {
+        background-color: #1e293b;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .course-image img {
+        width: 100%;
+        height: auto;
+    }
+</style>
+
+<section class="max-w-7xl mx-auto px-4 sm:px-4 lg:px-8 mb-12">
+    <h1 class="text-4xl leading-10 tracking-tight font-extrabold text-gray-900 pb-3">{{course.name}}</h1>
+    {% if has_access %}
+    {% else %}
+    <main class="bg-gray-15 rounded-lg flex flex-col md:flex-row items-start">
+        <div class="w-3/3 md:w-2/3 pr-6 pb-3">
+            <p class="mb-4">{{course.description}}</p>
+            <p
+                class="w-32 px-4 sm:px-4 lg:px-4 flex items-center mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-900 to-pink-500">
+                <i class="fas fa-signal mr-2"></i> Intermediate</p>
+            <h2 class="font-semibold mb-2">Chapters</h2>
+            <!-- toggle button -->
+            <div class="bg-gray-400 p-2 rounded-lg shadow-lg" x-data="{ open: false }" @click="open = !open">
+                <div class="font-semibold mb-1 flex justify-between items-center">
+                    <span>Courses</span>
+                    <i :class="open ? 'fas fa-chevron-up' : 'fas fa-chevron-down'"></i>
+                </div>
+                <div x-show="open" x-transition class="bg-gray-200 space-y-2">
+                    <p class="flex items-center"><i class="fas fa-arrow-right mr-2"></i> Cookiecutter Django</p>
+                    <p class="flex items-center"><i class="fas fa-arrow-right mr-2"></i> Django Tailwind</p>
+                    <p class="flex items-center"><i class="fas fa-arrow-right mr-2"></i> Django Vanilla Views</p>
+                </div>
+            </div>
+        </div>
+        <div class="md:w-1/3 bg-gray-200 p-4 rounded-lg">
+
+            <div class="course-image mb-6 object-cover ">
+                <img src="{% if course.thumbnail %}{{ course.thumbnail.url }}{% else %}https://plus.unsplash.com/premium_photo-1664193968829-4a732c3390e6?q=80&w=1413&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D{% endif %}"
+                    alt="{{course.name}}">
+            </div>
+            <p class="text-2xl font-bold mb-4">IN Rs.{{course.price_display}}</p>
+            <form action="{% url 'create-checkout-session' course.slug %}" method="POST">
+                {% csrf_token %}
+                <button
+                    class="w-full bg-blue-600 text-white font-semibold py-2 rounded-lg mb-4 hover:bg-blue-700">Enroll
+                    now</button>
+            </form>
+            <button class="w-full bg-gray-600 text-white font-semibold py-2 rounded-lg hover:bg-gray-700">Start</button>
+        </div>
+    </main>
+    {% endif %}
+</section>
+
+
+{% endblock %}
