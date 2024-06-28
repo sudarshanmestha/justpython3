@@ -86,7 +86,7 @@ THIRD_PARTY_APPS = [
     "theme",
 ]
 INTERNAL_IPS = [
-    "127.0.0.1",
+    "127.0.0.1", "justpython3"
 ]
 TAILWIND_APP_NAME = 'theme'
 
