@@ -40,7 +40,6 @@
                                         <span class="flex items-center">{{video.order}}<!-- -->.<!-- -->  <!-- -->{{video.title}}<span class="ml-3 flex items-center text-sm">{{video.timeline}}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2 h-4 w-4"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></span></span>
                                     </h3>
                                 </div>
-                                {% if not has_permission %}
                                 <div class="py-4">
                                     <div data-vimeo-initialized="true">
                                         <div style="padding:56.25% 0 0 0;position:relative;">
@@ -48,11 +47,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                {% else %}
-                                    <div >
-                                        <strong><h1 class="flex flex-wrap h-full bg-black text-gray-300 text-center py-12 px-6 lg:py-14">You do not have permission to view this course. Upgrade your subscription to Start</h1></strong>
-                                    </div>
-                                {% endif %}
+                                
                             
                                 
                             </article>

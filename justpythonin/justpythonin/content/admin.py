@@ -4,3 +4,5 @@ from .models import Course, Video
 
 admin.site.register(Course)
 admin.site.register(Video)
+# admin.site.register(Chapter)
+# admin.site.register(Level)
